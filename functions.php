@@ -26,6 +26,7 @@ class WM_Theme
 	public static function admin_init()
 	{
 		if ( class_exists( 'WM_Less' ) ) {
+			register_less_variables( get_template_directory() . '/less/variables.less' ),
 			less_import( array(
 				'less/bootstrap.less',
 				'less/theme.less',
