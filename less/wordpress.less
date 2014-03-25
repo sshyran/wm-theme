@@ -1,0 +1,36 @@
+.alignnone,
+.alignleft {
+	margin: @padding-base-vertical @grid-gutter-width (@line-height-computed / 2) 0;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin: @padding-base-vertical auto;
+}
+
+.alignright {
+	float: right;
+	margin: @padding-base-vertical 0 (@line-height-computed / 2) @grid-gutter-width;
+}
+
+.alignnone,
+.alignleft,
+.aligncenter,
+.alignright {
+	.img-responsive;
+}
+
+.wp-caption,
+:not(.wp-caption) > img[class*="wp-image-"] {
+	.thumbnail;
+	&:extend(.thumbnail all);
+	max-width: 100%;
+	.wp-caption-text {
+		&:extend(.thumbnail .caption all);
+		margin: 0;
+	}
+}

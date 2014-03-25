@@ -1,0 +1,55 @@
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-brand h1 {
+	margin: 0;
+	color: inherit;
+	font: inherit;
+}
+
+section a.panel {
+	color: @text-color;
+	display: block;
+	img {
+		margin: 0 auto (@line-height-computed / 2);
+	}
+	&:hover {
+		text-decoration: none;
+		&:extend(.panel-primary all);
+	}
+}
+
+footer.jumbotron {
+	margin: @line-height-computed 0 0;
+	p {
+		font-size: @font-size-base;
+	}
+}
+
+
+@media (max-width: @grid-float-breakpoint) {
+	.navbar-collapse .nav a {
+		text-align: center;
+	}
+}
+@media (max-width: @screen-sm-max) {
+	article.jumbotron,
+	header.jumbotron {
+		text-align: center;
+		p {
+			font-size: @font-size-large;
+		}
+		img {
+			margin-top: @line-height-computed;
+		}
+	}
+}
+@media (min-width: @screen-md-min) {
+	article.jumbotron,
+	header.jumbotron {
+		img {
+			margin-top: @line-height-computed;
+		}
+	}
+}
