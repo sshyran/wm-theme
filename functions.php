@@ -6,7 +6,6 @@ class WM_Theme
 {
 	public static function setup()
 	{
-		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
 
 		add_filter( 'form_fields', array( __CLASS__, 'form_fields' ), 10, 2 );
@@ -21,12 +20,9 @@ class WM_Theme
 		add_theme_support( 'post-thumbnails' );
 		// add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
 		add_post_type_support( 'page', 'excerpt' );
-	}
 
-	public static function admin_init()
-	{
 		if ( class_exists( 'WM_Less' ) ) {
-			register_less_variables( get_template_directory() . '/less/variables.less' ),
+			register_less_variables( get_template_directory() . '/less/variables.less' );
 			less_import( array(
 				'less/bootstrap.less',
 				'less/theme.less',
@@ -38,7 +34,6 @@ class WM_Theme
 
 	public static function enqueue_scripts()
 	{
-		wp_enqueue_style( 'fonts', 'http://fonts.googleapis.com/css?family=Lobster+Two:400,700|Open+Sans:300,800|Open+Sans+Condensed:700' );
 		wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' );
 		wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/vendor/bootstrap.min.js', array( 'jquery' ), null, true );
 		wp_enqueue_script( 'wm-plugins', get_template_directory_uri() . '/js/plugins.js', array( 'jquery' ), null, true );
