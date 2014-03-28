@@ -6,6 +6,7 @@ jQuery(document).ready(function ($) {
       $(this).html(icon).tooltip({ placement: 'auto' });
     }
   });
+  $('.social a').tooltip({ placement: 'bottom' });
   $('.tiles').bsTiles();
 
   // http://jqueryvalidation.org/validate
