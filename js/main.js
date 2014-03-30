@@ -7,8 +7,10 @@ jQuery(document).ready(function ($) {
     }
   });
   $('.social a').tooltip({ placement: 'bottom' });
-  $('.tiles').bsTiles();
-
+  $('.tiles').wmTiles();
+  $('.form-control[placeholder]', '.form-horizontal').each(function () {
+    $(this).bsPeekabooLabel();
+  });
   // http://jqueryvalidation.org/validate
   if ( $.validator ) {
     $.validator.setDefaults({
@@ -21,5 +23,4 @@ jQuery(document).ready(function ($) {
       errorClass: 'help-block'
     });
   }
-
 });

@@ -1,21 +1,23 @@
-// https://gist.github.com/WebMaestroFr/9481254
 (function ($) {
   'use strict';
-  $.fn.bsTiles = function () {
+// https://gist.github.com/WebMaestroFr/9481254
+  $.fn.wmTiles = function () {
     var container = $(this),
-      tiles = $('[class^="col-"],[class*=" col-"]', container),
+      tiles = container.children(),
       arrange = function () {
         var places = [{
             t: 0,
             l: 0,
-            w: container.innerWidth()
+            w: container.width()
           }],
-          p = 0, // Place index
-          n, // Next place index
+          p = 0,
+          n,
           updateIndexes = function () {
             var i;
             for (i = 0; i < places.length; i += 1) {
-              if (i === 0 || places[i].t < places[p].t) { p = i; }
+              if (i === 0 || places[i].t < places[p].t) {
+                p = i;
+              }
             }
             switch (p) {
             case 0:
@@ -30,8 +32,8 @@
           },
           fit = function (tile) {
             var w = $(tile).outerWidth(),
-              h = $(tile).outerHeight();
-            if (w < places[p].w + 2) {
+              h = $(tile).height();
+            if (w < places[p].w + 3) {
               if (w < places[p].w) {
                 places.splice(p + 1, 0, {
                   t: places[p].t,
@@ -62,26 +64,25 @@
           };
         tiles.removeAttr('style');
         if (tiles.css('float') === 'left') {
+          container.height(0);
           $.map(tiles, function (tile) {
             while (!fit(tile)) { merge(); }
           });
+        } else {
+          container.height('auto');
         }
       };
     container.css({ position: 'relative' });
-    setTimeout(function () { arrange(); }, 400);
+    setTimeout(function () { arrange(); }, 400); // Why the heck can't it work properly straight up ?
     $(window).resize(function () { arrange(); });
   };
-}(jQuery));
-
 // https://gist.github.com/WebMaestroFr/9405966
-(function ($) {
-  'use strict';
   $.fn.bsPeekabooLabel = function () {
     var input = $(this),
       control = input.closest('[class*="col-"]'),
       label = control.siblings('.control-label'),
       show = false,
-      toggle = function (d) {
+      place = function (d) {
         var m;
         if ($(control).css('float') === 'left') {
           m = '0 0 0 ' + label.outerWidth() + 'px';
@@ -91,17 +92,15 @@
           label.animate({ margin: 0, opacity: 1 }, d);
           control.animate({ margin: show ? label.outerHeight() + 'px 0 0' : 0 }, d);
         }
-        show = !show;
       };
     label.css({ position: 'absolute' });
-    toggle(0);
+    place(0);
     input.keyup(function () {
-      var empty = !input.val();
-      if (show !== empty) { toggle(400); }
+      if (show === !input.val()) {
+        show = !show;
+        place(400);
+      }
     });
-    $(window).resize(function () { toggle(0); });
+    $(window).resize(function () { place(0); });
   };
-  $('.form-control[placeholder]', '.form-horizontal').each(function () {
-    $(this).bsPeekabooLabel();
-  });
 }(jQuery));
