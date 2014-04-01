@@ -151,7 +151,7 @@ class WM_Theme
     return $date;
 	}
 }
-add_action( 'after_setup_theme', array( WM_Theme, 'setup' ) );
+add_action( 'after_setup_theme', array( 'WM_Theme', 'setup' ) );
 
 function wm_get_archive_title()
 {
@@ -191,7 +191,7 @@ function wm_get_archive_thumbnail( $size = 'medium', $attr = null )
 {
 	if ( is_home() && $page_id = get_option( 'page_for_posts' ) ) {
 		$thumbnail = get_post_thumbnail_id( $page_id );
-	} elseif ( class_exists( WM_Plugin ) ) {
+	} elseif ( class_exists( 'WM_Plugin' ) ) {
 		// TODO : Add support for "Terms Thumbnail" ...
 		if ( is_author() && $profile = get_the_author_meta( 'profile' ) ) {
 			$thumbnail = $profile['picture'];
